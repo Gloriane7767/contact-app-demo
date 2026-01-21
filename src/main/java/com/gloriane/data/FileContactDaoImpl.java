@@ -11,11 +11,12 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileContactDaoImpl {
+public class FileContactDaoImpl implements ContactDao {
 
     private Path path = Path.of("contacts.txt");
 
-    public void addContact(Contact contact) throws ContactStorageException, DuplicateContactException {
+    @Override
+    public void save(Contact contact) throws ContactStorageException, DuplicateContactException {
         try {
             // Check if contact already exists
             if (contactExists(contact.getName())) {
@@ -31,7 +32,8 @@ public class FileContactDaoImpl {
         }
     }
 
-    public Contact getContactByName(String contactName) throws ContactStorageException {
+    @Override
+    public Contact findByName(String contactName) throws ContactStorageException {
         try {
             if (!Files.exists(path)) {
                 return null;
@@ -44,7 +46,8 @@ public class FileContactDaoImpl {
         }
     }
 
-    public List<Contact> getAllContacts() throws ContactStorageException {
+    @Override
+    public List<Contact> findAll() throws ContactStorageException {
         try {
             if (!Files.exists(path)) {
                 return new ArrayList<>();

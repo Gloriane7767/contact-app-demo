@@ -36,4 +36,7 @@ public class ContactView {
     public void displayError(String message) {
         System.out.println("Error: " + message);
     }
+
+    public void displayMenu() {
+    }
 }
